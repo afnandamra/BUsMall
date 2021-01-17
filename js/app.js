@@ -16,7 +16,7 @@ var thirdImg = document.createElement('img');
 thirdImg.id = 'thirdImg';
 var resultList = document.getElementById('resultList');
 var form = document.getElementById('form');
-
+var button = document.getElementById('resultButton');
 
 // object constructor
 function Product(imgName) {
@@ -26,8 +26,6 @@ function Product(imgName) {
     this.vote = 0;
     imgArray.push(this);
 }
-
-
 
 // declaring objects
 new Product('bag');
@@ -51,14 +49,16 @@ new Product('usb');
 new Product('water-can');
 new Product('wine-glass');
 
-
+// envoking functions
 chooseThreeImages();
 renderImages();
 
-form = addEventListener('submit', submitted);
+// adding events
+form.addEventListener('submit', submitted);
 imgDiv.addEventListener('click', userClick);
+button.addEventListener('click', result, { once: true });
 
-// functions
+// event functions
 function submitted(event) {
     console.log(event.target.userAttempts.value);
     event.preventDefault();
@@ -70,7 +70,6 @@ function submitted(event) {
 function userClick(event) {
     console.log(event.target);
     attempts--;
-    // userAttempts--;
     console.log(attempts);
     if (attempts > 0) {
         if (event.target.id === firstImg.id) {
@@ -90,15 +89,18 @@ function userClick(event) {
             attempts++;
         }
     } else {
-        //event end
-        var results;
-        for (var i = 0; i < imgArray.length; i++) {
-            results = document.createElement('li');
-            results.textContent = imgArray[i].name + ' got ' + imgArray[i].vote + ' votes.' + 'And was shown ' + imgArray[i].shown + ' times.';
-            resultList.appendChild(results);
-        }
-        imgDiv.removeEventListener('click', userClick);
+        result();
     }
+}
+
+function result() {
+    var results;
+    for (var i = 0; i < imgArray.length; i++) {
+        results = document.createElement('li');
+        results.textContent = imgArray[i].name + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
+        resultList.appendChild(results);
+    }
+    imgDiv.removeEventListener('click', userClick);
 }
 
 // render functions
@@ -122,7 +124,6 @@ function renderImages() {
     thirdImg.src = imgArray[thirdImgIndex].src;
     imgDiv.appendChild(thirdImg);
 }
-
 
 // random function
 function randomIndex() {
