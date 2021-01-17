@@ -1,15 +1,14 @@
-# LAB - Number
+# LAB - 11
 
-## Project Name
+## Bus Mall
 
-I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
+This project is about having a vote and display the results for the user
 
-### Author: Student/Group Name
+### Author: Afnan Damra
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
-* Any Links you used as reference
+* [Repo link](https://github.com/afnandamra/BusMall)
+* [Deployed page](https://afnandamra.github.io/BusMall/)
 
 ### Reflections and Comments
-* Consider including the answers to your daily journal and submission questions here
-* This is also a good place to reflect on the tools and resources used and learned
+This was a good lab and I enjoyed doing CSS for the project as much as I enjoyed solving the lab
