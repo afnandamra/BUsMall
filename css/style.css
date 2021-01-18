@@ -25,7 +25,8 @@
 }
 body{
     position: relative;
-    background-color: var(--lightBlue);
+    background-color:var(--lightBlue);
+    background-image: linear-gradient(to bottom right, var(--lightBlue) 30%, #d1d1d1 70%);
     height: 100%;
     width: 100%;
 }
