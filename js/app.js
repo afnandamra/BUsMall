@@ -14,6 +14,9 @@ var secondImg = document.createElement('img');
 secondImg.id = 'secondImg';
 var thirdImg = document.createElement('img');
 thirdImg.id = 'thirdImg';
+var firstImgTitle = document.createElement('h2');
+var secondImgTitle = document.createElement('h2');
+var thirdImgTitle = document.createElement('h2');
 var resultList = document.getElementById('resultList');
 var form = document.getElementById('form');
 var button = document.getElementById('resultButton');
@@ -60,36 +63,31 @@ button.addEventListener('click', result, { once: true });
 
 // event functions
 function submitted(event) {
-    console.log(event.target.userAttempts.value);
     event.preventDefault();
     userAttempts = event.target.userAttempts.value;
-    console.log(document.getElementById('userAttempts'));
     attempts = userAttempts;
 }
 
 function userClick(event) {
-    console.log(event.target);
     attempts--;
-    console.log(attempts);
     if (attempts > 0) {
+        chooseThreeImages();
         if (event.target.id === firstImg.id) {
             imgArray[firstImgIndex].vote++;
-            chooseThreeImages();
             renderImages();
         } else if (event.target.id === secondImg.id) {
             imgArray[secondImgIndex].vote++;
-            chooseThreeImages();
             renderImages();
         } else if (event.target.id === thirdImg.id) {
             imgArray[thirdImgIndex].vote++;
-            chooseThreeImages();
             renderImages();
         }
         else {
             attempts++;
         }
     } else {
-        result();
+        imgDiv.removeEventListener('click', userClick);
+        button.removeAttribute('disabled');
     }
 }
 
@@ -97,10 +95,9 @@ function result() {
     var results;
     for (var i = 0; i < imgArray.length; i++) {
         results = document.createElement('li');
-        results.textContent = imgArray[i].name + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
+        results.textContent = imgArray[i].name.toUpperCase() + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
         resultList.appendChild(results);
     }
-    imgDiv.removeEventListener('click', userClick);
 }
 
 // render functions
@@ -117,6 +114,12 @@ function chooseThreeImages() {
 }
 
 function renderImages() {
+    firstImgTitle.textContent = imgArray[firstImgIndex].name;
+    imgDiv.appendChild(firstImgTitle);
+    secondImgTitle.textContent = imgArray[secondImgIndex].name;
+    imgDiv.appendChild(secondImgTitle);
+    thirdImgTitle.textContent = imgArray[thirdImgIndex].name;
+    imgDiv.appendChild(thirdImgTitle);
     firstImg.src = imgArray[firstImgIndex].src;
     imgDiv.appendChild(firstImg);
     secondImg.src = imgArray[secondImgIndex].src;

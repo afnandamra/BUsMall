@@ -3,7 +3,7 @@
 :root{
     --darkBlue: #3b5360;
     --darkPurple: #8b5e83;
-    --lightBlue: #bee5d3;
+    --lightBlue: #e0e0e086;
     --lightPurple: #d6b0b1;
 }
 #images>img{
@@ -14,6 +14,14 @@
     border: 1px solid var(--darkBlue);
     background-color: white;
     box-shadow: 3px 3px 5px var(--darkBlue);
+    margin:10px;
+}
+#images>img:hover{
+    cursor: pointer;
+    opacity: 65%;
+    height: 270px;
+    width: 90%;
+    margin:0px;
 }
 body{
     position: relative;
@@ -45,7 +53,6 @@ header>h1{
 main{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
-    /* gap: 5px; */
 }
 #description{
     grid-column: 1/-1;
@@ -70,6 +77,13 @@ main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 30px 50px 30px 100px;
+}
+#images>h2{
+    font-family: 'Amatic SC', cursive;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--darkBlue);
 }
 #userAttempts {
     width: 70px;
@@ -101,6 +115,7 @@ main{
 #results{
     position: relative;
     left:-50px;
+    top: 30px;
 }
 #results>h3{
     font-family: 'Amatic SC', cursive;
@@ -112,7 +127,8 @@ main{
 button{
     position: absolute;
     top: 0px;
-    right: 50px;
+    left: 30px;
+    /* right: 50px; */
     height: 30px;
     background-color: var(--darkBlue);
     border: none;
@@ -120,9 +136,19 @@ button{
     color: white;
     font-family: 'Amatic SC', cursive;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     box-shadow: 2px 2px 2px #3b53608a;
+}
+button:disabled{
+    background-color: var(--lightBlue);
+    color: var(--lightBlue);
+    box-shadow: none;
+}
+button:disabled:hover{
+    cursor:unset;
+    background-color: var(--lightBlue);
+    color: var(--lightBlue);
 }
 button:hover{
     cursor: pointer;
@@ -131,6 +157,8 @@ button:hover{
     font-weight: 700;
 }
 ul{
+    position: relative;
+    top: 40px;
     padding: 10px;
     height: 270px;
     overflow-y: scroll;
@@ -140,6 +168,14 @@ li{
     font-size: 12px;
     font-weight: 200;
     line-height: 1.5;
+}
+footer{
+    margin-top: 20px;
+    padding: 20px;
+}
+hr{
+    position: relative;
+    top: -20px;
 }
 footer>h4{
     text-align: center;
