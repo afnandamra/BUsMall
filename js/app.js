@@ -4,9 +4,13 @@
 var imgArray = [];
 var attempts = 25;
 var userAttempts = 0;
+var imgNames = [];
+var imgShown = [];
+var imgVotes = [];
+var firstImgIndex, secondImgIndex, thirdImgIndex;
+var indexes = [firstImgIndex, secondImgIndex, thirdImgIndex];
 
 // DOM variables
-var firstImgIndex, secondImgIndex, thirdImgIndex;
 var imgDiv = document.getElementById('images');
 var firstImg = document.createElement('img');
 firstImg.id = 'firstImg';
@@ -17,9 +21,12 @@ thirdImg.id = 'thirdImg';
 var firstImgTitle = document.createElement('h2');
 var secondImgTitle = document.createElement('h2');
 var thirdImgTitle = document.createElement('h2');
-var resultList = document.getElementById('resultList');
+// var resultList = document.getElementById('resultList');
 var form = document.getElementById('form');
 var button = document.getElementById('resultButton');
+
+
+
 
 // object constructor
 function Product(imgName) {
@@ -28,6 +35,9 @@ function Product(imgName) {
     this.shown = 0;
     this.vote = 0;
     imgArray.push(this);
+    imgNames.push(this.name);
+    imgShown.push(this.shown);
+    imgVotes.push(this.vote);
 }
 
 // declaring objects
@@ -70,7 +80,7 @@ function submitted(event) {
 
 function userClick(event) {
     attempts--;
-    if (attempts > 0) {
+    if (attempts >= 0) {
         chooseThreeImages();
         if (event.target.id === firstImg.id) {
             imgArray[firstImgIndex].vote++;
@@ -85,32 +95,45 @@ function userClick(event) {
         else {
             attempts++;
         }
+        for (var i = 0; i < imgArray.length; i++) {
+            imgVotes[i] = imgArray[i].vote;
+        }
     } else {
-        imgDiv.removeEventListener('click', userClick);
         button.removeAttribute('disabled');
+        imgDiv.removeEventListener('click', userClick);
     }
+
 }
 
 function result() {
+    renderChart();
     var results;
-    for (var i = 0; i < imgArray.length; i++) {
-        results = document.createElement('li');
-        results.textContent = imgArray[i].name.toUpperCase() + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
-        resultList.appendChild(results);
-    }
+    // for (var i = 0; i < imgArray.length; i++) {
+    //     results = document.createElement('li');
+    //     results.textContent = imgArray[i].name.toUpperCase() + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
+    //     resultList.appendChild(results);
+    // }
 }
+
 
 // render functions
 function chooseThreeImages() {
     //getting random indexes
-    firstImgIndex = randomIndex();
     do {
-        secondImgIndex = randomIndex();
-        thirdImgIndex = randomIndex();
-    } while (firstImgIndex === secondImgIndex || firstImgIndex === thirdImgIndex || secondImgIndex === thirdImgIndex)
-    imgArray[firstImgIndex].shown++
-    imgArray[secondImgIndex].shown++
-    imgArray[thirdImgIndex].shown++
+        firstImgIndex = randomIndex();
+        do {
+            secondImgIndex = randomIndex();
+            thirdImgIndex = randomIndex();
+        } while (firstImgIndex === secondImgIndex || firstImgIndex === thirdImgIndex || secondImgIndex === thirdImgIndex)
+    } while (indexes.includes(firstImgIndex) || indexes.includes(secondImgIndex) || indexes.includes(thirdImgIndex))
+
+    imgArray[firstImgIndex].shown++;
+    imgArray[secondImgIndex].shown++;
+    imgArray[thirdImgIndex].shown++;
+    for (var i = 0; i < imgArray.length; i++) {
+        imgShown[i] = imgArray[i].shown;
+    }
+    indexes = [firstImgIndex, secondImgIndex, thirdImgIndex];
 }
 
 function renderImages() {
@@ -132,3 +155,5 @@ function renderImages() {
 function randomIndex() {
     return Math.floor(Math.random() * imgArray.length);
 }
+
+
