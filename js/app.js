@@ -24,9 +24,7 @@ var thirdImgTitle = document.createElement('h2');
 // var resultList = document.getElementById('resultList');
 var form = document.getElementById('form');
 var button = document.getElementById('resultButton');
-
-
-
+var ctx = document.getElementById('resultChart').getContext('2d');
 
 // object constructor
 function Product(imgName) {
@@ -107,14 +105,13 @@ function userClick(event) {
 
 function result() {
     renderChart();
-    var results;
+    // var results;
     // for (var i = 0; i < imgArray.length; i++) {
     //     results = document.createElement('li');
     //     results.textContent = imgArray[i].name.toUpperCase() + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
     //     resultList.appendChild(results);
     // }
 }
-
 
 // render functions
 function chooseThreeImages() {
@@ -156,4 +153,33 @@ function randomIndex() {
     return Math.floor(Math.random() * imgArray.length);
 }
 
-
+// chart
+function renderChart() {
+    var myBarChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: imgNames,
+            datasets: [
+                {
+                    label: "seen",
+                    backgroundColor: "#3b5360",
+                    data: imgShown
+                }, {
+                    label: "voted",
+                    backgroundColor: "#8b5e83",
+                    data: imgVotes
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Vote Results',
+                position: 'bottom',
+            },
+            data: {
+                precision: 0
+            }
+        }
+    });
+}
