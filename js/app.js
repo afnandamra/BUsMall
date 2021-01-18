@@ -21,7 +21,7 @@ var button = document.getElementById('resultButton');
 // object constructor
 function Product(imgName) {
     this.name = imgName;
-    this.src = '../img/' + imgName + '.jpg';
+    this.src = 'img/' + imgName + '.jpg';
     this.shown = 0;
     this.vote = 0;
     imgArray.push(this);
