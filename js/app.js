@@ -1,5 +1,6 @@
 'use strict'
 
+
 // global variables
 var imgArray = [];
 var attempts = 25;
