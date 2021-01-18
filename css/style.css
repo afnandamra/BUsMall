@@ -78,6 +78,7 @@ main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 30px 50px 30px 100px;
+    margin-right: 30px;
 }
 #images>h2{
     font-family: 'Amatic SC', cursive;
