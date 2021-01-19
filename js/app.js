@@ -1,5 +1,6 @@
 'use strict'
 
+
 // global variables
 var imgArray = [];
 var attempts = 25;
@@ -24,6 +25,7 @@ var thirdImgTitle = document.createElement('h2');
 // var resultList = document.getElementById('resultList');
 var form = document.getElementById('form');
 var button = document.getElementById('resultButton');
+var chart = document.getElementById('resultChart');
 var ctx = document.getElementById('resultChart').getContext('2d');
 
 // object constructor
@@ -104,6 +106,7 @@ function userClick(event) {
 }
 
 function result() {
+    chart.style.display = "block";
     renderChart();
     // var results;
     // for (var i = 0; i < imgArray.length; i++) {
@@ -155,8 +158,8 @@ function randomIndex() {
 
 // chart
 function renderChart() {
-    var myBarChart = new Chart(ctx, {
-        type: 'horizontalBar',
+    new Chart(ctx, {
+        type: 'bar',
         data: {
             labels: imgNames,
             datasets: [
@@ -179,7 +182,20 @@ function renderChart() {
             },
             data: {
                 precision: 0
+            },
+            maintainAspectRatio: true,
+            aspectRatio: 2,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        beginAtZero: 0,
+                        stepSize: 1,
+                    }
+                }],
+
             }
+
         }
     });
 }
