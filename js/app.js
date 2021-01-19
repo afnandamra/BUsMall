@@ -29,6 +29,11 @@ var button = document.getElementById('resultButton');
 var chart = document.getElementById('resultChart');
 var ctx = document.getElementById('resultChart').getContext('2d');
 
+if (imgArray) {
+    // button.removeAttribute('disabled');
+    renderChart();
+}
+
 // object constructor
 function Product(imgName) {
     this.name = imgName;
@@ -39,32 +44,31 @@ function Product(imgName) {
     imgVotes.push(this.vote);
 }
 
-// declaring objects
-if (!imgArray) {
-    imgArray = [
-        new Product('bag'),
-        new Product('banana'),
-        new Product('bathroom'),
-        new Product('boots'),
-        new Product('breakfast'),
-        new Product('bubblegum'),
-        new Product('chair'),
-        new Product('cthulhu'),
-        new Product('dog-duck'),
-        new Product('dragon'),
-        new Product('pen'),
-        new Product('pet-sweep'),
-        new Product('scissors'),
-        new Product('shark'),
-        new Product('sweep'),
-        new Product('tauntaun'),
-        new Product('unicorn'),
-        new Product('usb'),
-        new Product('water-can'),
-        new Product('wine-glass')
-    ];
-    console.log('inside if', imgArray)
-}
+// declaring objects .... if statement to keep all data even after multiple refreshes
+// if (!imgArray) {
+imgArray = [
+    new Product('bag'),
+    new Product('banana'),
+    new Product('bathroom'),
+    new Product('boots'),
+    new Product('breakfast'),
+    new Product('bubblegum'),
+    new Product('chair'),
+    new Product('cthulhu'),
+    new Product('dog-duck'),
+    new Product('dragon'),
+    new Product('pen'),
+    new Product('pet-sweep'),
+    new Product('scissors'),
+    new Product('shark'),
+    new Product('sweep'),
+    new Product('tauntaun'),
+    new Product('unicorn'),
+    new Product('usb'),
+    new Product('water-can'),
+    new Product('wine-glass')
+];
+// }
 
 // envoking functions
 chooseThreeImages();
@@ -73,7 +77,7 @@ renderImages();
 // adding events
 form.addEventListener('submit', submitted);
 imgDiv.addEventListener('click', userClick);
-button.addEventListener('click', result, { once: true });
+button.addEventListener('click', result);
 
 // event functions
 function submitted(event) {
@@ -100,17 +104,13 @@ function userClick(event) {
             attempts++;
         }
     } else {
-        button.removeAttribute('disabled');
+        // button.removeAttribute('disabled');
         imgDiv.removeEventListener('click', userClick);
     }
 
 }
 
 function result() {
-    for (var i = 0; i < imgArray.length; i++) {
-        imgShown[i] = imgArray[i].shown;
-        imgVotes[i] = imgArray[i].vote;
-    }
     chart.style.display = "block";
     renderChart();
     // var results;
@@ -119,6 +119,7 @@ function result() {
     //     results.textContent = imgArray[i].name.toUpperCase() + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
     //     resultList.appendChild(results);
     // }
+
     // setting local storage
     localStorage.setItem('allProducts', JSON.stringify(imgArray));
 }
@@ -166,6 +167,8 @@ function renderChart() {
     var imgNames = [];
     for (var i = 0; i < imgArray.length; i++) {
         imgNames[i] = imgArray[i].name + ' (' + (imgArray[i].vote * imgArray[i].shown) / 100 + '%)';
+        imgShown[i] = imgArray[i].shown;
+        imgVotes[i] = imgArray[i].vote;
     }
     new Chart(ctx, {
         type: 'bar',
