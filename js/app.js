@@ -184,7 +184,18 @@ function renderChart() {
                 precision: 0
             },
             maintainAspectRatio: true,
-            aspectRatio: 2
+            aspectRatio: 2,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        beginAtZero: 0,
+                        stepSize: 1,
+                    }
+                }],
+
+            }
+
         }
     });
 }
