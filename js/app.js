@@ -40,7 +40,7 @@ function Product(imgName) {
 }
 
 // declaring objects
-if (imgArray === null) {
+if (!imgArray) {
     imgArray = [
         new Product('bag'),
         new Product('banana'),
