@@ -1,11 +1,12 @@
 'use strict'
 
+// getting from local storge
+var imgArray = JSON.parse(localStorage.getItem('allProducts'));
+console.log('after get', imgArray);
 
 // global variables
-var imgArray = [];
 var attempts = 25;
 var userAttempts = 0;
-var imgNames = [];
 var imgShown = [];
 var imgVotes = [];
 var firstImgIndex, secondImgIndex, thirdImgIndex;
@@ -34,33 +35,36 @@ function Product(imgName) {
     this.src = 'img/' + imgName + '.jpg';
     this.shown = 0;
     this.vote = 0;
-    imgArray.push(this);
-    imgNames.push(this.name);
     imgShown.push(this.shown);
     imgVotes.push(this.vote);
 }
 
 // declaring objects
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('usb');
-new Product('water-can');
-new Product('wine-glass');
+if (imgArray === []) {
+    imgArray = [
+        new Product('bag'),
+        new Product('banana'),
+        new Product('bathroom'),
+        new Product('boots'),
+        new Product('breakfast'),
+        new Product('bubblegum'),
+        new Product('chair'),
+        new Product('cthulhu'),
+        new Product('dog-duck'),
+        new Product('dragon'),
+        new Product('pen'),
+        new Product('pet-sweep'),
+        new Product('scissors'),
+        new Product('shark'),
+        new Product('sweep'),
+        new Product('tauntaun'),
+        new Product('unicorn'),
+        new Product('usb'),
+        new Product('water-can'),
+        new Product('wine-glass')
+    ];
+    console.log('inside if', imgArray)
+}
 
 // envoking functions
 chooseThreeImages();
@@ -95,9 +99,6 @@ function userClick(event) {
         else {
             attempts++;
         }
-        for (var i = 0; i < imgArray.length; i++) {
-            imgVotes[i] = imgArray[i].vote;
-        }
     } else {
         button.removeAttribute('disabled');
         imgDiv.removeEventListener('click', userClick);
@@ -106,6 +107,10 @@ function userClick(event) {
 }
 
 function result() {
+    for (var i = 0; i < imgArray.length; i++) {
+        imgShown[i] = imgArray[i].shown;
+        imgVotes[i] = imgArray[i].vote;
+    }
     chart.style.display = "block";
     renderChart();
     // var results;
@@ -114,6 +119,8 @@ function result() {
     //     results.textContent = imgArray[i].name.toUpperCase() + ' got ' + imgArray[i].vote + ' votes out of ' + imgArray[i].shown + ' times it was displayed.';
     //     resultList.appendChild(results);
     // }
+    // setting local storage
+    localStorage.setItem('allProducts', JSON.stringify(imgArray));
 }
 
 // render functions
@@ -130,9 +137,7 @@ function chooseThreeImages() {
     imgArray[firstImgIndex].shown++;
     imgArray[secondImgIndex].shown++;
     imgArray[thirdImgIndex].shown++;
-    for (var i = 0; i < imgArray.length; i++) {
-        imgShown[i] = imgArray[i].shown;
-    }
+
     indexes = [firstImgIndex, secondImgIndex, thirdImgIndex];
 }
 
@@ -158,6 +163,10 @@ function randomIndex() {
 
 // chart
 function renderChart() {
+    var imgNames = [];
+    for (var i = 0; i < imgArray.length; i++) {
+        imgNames[i] = imgArray[i].name + ' (' + (imgArray[i].vote * imgArray[i].shown) / 100 + '%)';
+    }
     new Chart(ctx, {
         type: 'bar',
         data: {
@@ -188,9 +197,10 @@ function renderChart() {
             scales: {
                 yAxes: [{
                     ticks: {
+                        // max:50,
                         min: 0,
                         beginAtZero: 0,
-                        stepSize: 1,
+                        // stepSize: 1,
                     }
                 }],
 

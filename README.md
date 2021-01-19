@@ -1,8 +1,8 @@
-# LAB - 12
+# LAB - 13
+19-1-2021
 
-## Add a chart to your BusMall app
-
-This project is about having a vote and display the results for the user.
+## Add local storage to BusMall
+This project is about having a user vote and display the results.
 
 ### Author: Afnan Damra
 
@@ -11,6 +11,4 @@ This project is about having a vote and display the results for the user.
 * [Deployed page](https://afnandamra.github.io/BusMall/)
 
 ### Reflections and Comments
-Today's lab was about turning the collected data to a chart using the chart.js open source library.
-And while solving the lab I learned the array method `.include()`.
-This was a good lab and I enjoyed doing CSS for the project as much as I enjoyed solving the lab.
+This lab was about keeping votes data in localStorage.
