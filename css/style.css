@@ -13,8 +13,14 @@ body{
     height: 100%;
     width: 100%;
 }
-a{
+nav>a{
     text-decoration: none;
+    color: var(--darkBlue);
+}
+nav>a:hover{
+    font-size: 35px;
+    color: #e2f7ed;
+    text-shadow: var(--darkBlue) 1px 1px;
 }
 header, footer{
     position: relative;
@@ -47,10 +53,6 @@ nav{
     font-weight: 700;
     font-size: 30px;
     text-align: center;
-}
-nav:hover{
-    font-size: 35px;
-    color: #e2f7ed;
 }
 main{
     position: relative;
