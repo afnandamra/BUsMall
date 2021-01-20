@@ -1,8 +1,7 @@
 'use strict'
 
 // getting from local storge
-var imgArray = JSON.parse(localStorage.getItem('allProducts'));
-console.log('after get', imgArray);
+var imgArray;
 
 // global variables
 var attempts = 25;
@@ -29,10 +28,10 @@ var button = document.getElementById('resultButton');
 var chart = document.getElementById('resultChart');
 var ctx = document.getElementById('resultChart').getContext('2d');
 
-if (imgArray) {
-    // button.removeAttribute('disabled');
-    renderChart();
-}
+// if (imgArray) {
+//     // button.removeAttribute('disabled');
+//     renderChart();
+// }
 
 // object constructor
 function Product(imgName) {
@@ -84,6 +83,7 @@ function submitted(event) {
     event.preventDefault();
     userAttempts = event.target.userAttempts.value;
     attempts = userAttempts;
+    form.reset();
 }
 
 function userClick(event) {
@@ -104,7 +104,7 @@ function userClick(event) {
             attempts++;
         }
     } else {
-        // button.removeAttribute('disabled');
+        button.removeAttribute('disabled');
         imgDiv.removeEventListener('click', userClick);
     }
 

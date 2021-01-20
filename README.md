@@ -1,5 +1,5 @@
-# LAB - 13
-19-1-2021
+# LAB - 14
+20-1-2021
 
 ## Add local storage to BusMall
 This project is about having a user vote and display the results.
@@ -12,3 +12,4 @@ This project is about having a user vote and display the results.
 
 ### Reflections and Comments
 This lab was about keeping votes data in localStorage.
+Update: (retrive data between html pages)
