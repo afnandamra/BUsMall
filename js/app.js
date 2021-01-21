@@ -28,11 +28,6 @@ var button = document.getElementById('resultButton');
 var chart = document.getElementById('resultChart');
 var ctx = document.getElementById('resultChart').getContext('2d');
 
-// if (imgArray) {
-//     // button.removeAttribute('disabled');
-//     renderChart();
-// }
-
 // object constructor
 function Product(imgName) {
     this.name = imgName;

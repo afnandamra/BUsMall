@@ -1,5 +1,5 @@
-# LAB - 14
-20-1-2021
+# BusMall
+21-1-2021
 
 ## Add local storage to BusMall
 This project is about having a user vote and display the results.
